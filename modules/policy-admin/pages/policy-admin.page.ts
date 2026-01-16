@@ -99,22 +99,16 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        // // Click Search button inside this dialog
-        // const searchButton = dialog.getByRole('button', { name: 'Search' });
-        // await searchButton.waitFor({ state: 'visible' });
-        // await searchButton.click();
+        // Locate Customer Name input group within dialog
+        const customerNameTextField = dialog
+            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
+            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Name")') });
 
-        // // Scope to the search table
-        // const searchTable = this.frame.locator('#searchDataTable');
-        // await searchTable.waitFor({ state: 'visible' });
+        // Fill in input field
+        const customerNameInput = customerNameTextField.locator('input.rb-input');
+        await customerNameInput.waitFor({ state: 'visible' });
+        await customerNameInput.fill('Hazim Kacak');
 
-        // // Locate the search icon inside the input suffix
-        // const searchIcon = searchTable
-        //     .locator('.rb-input-suffix')
-        //     .locator('.rainbow.Search');
-
-        // await searchIcon.waitFor({ state: 'visible' });
-        // await searchIcon.click();
     }
 
 
