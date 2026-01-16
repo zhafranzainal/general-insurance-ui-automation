@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../../shared/tests/base.test.js';
 import * as dotenv from 'dotenv';
 import { LoginPage } from '../../../shared/pages/login.page.js';
 
