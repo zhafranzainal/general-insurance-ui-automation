@@ -103,6 +103,18 @@ export class PolicyAdminPage {
         const searchButton = dialog.getByRole('button', { name: 'Search' });
         await searchButton.waitFor({ state: 'visible' });
         await searchButton.click();
+
+        // Scope to the search table
+        const searchTable = this.frame.locator('#searchDataTable');
+        await searchTable.waitFor({ state: 'visible' });
+
+        // Locate the search icon inside the input suffix
+        const searchIcon = searchTable
+            .locator('.rb-input-suffix')
+            .locator('.rainbow.Search');
+
+        await searchIcon.waitFor({ state: 'visible' });
+        await searchIcon.click();
     }
 
 
