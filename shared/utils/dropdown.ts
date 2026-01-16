@@ -1,5 +1,15 @@
 import type { Frame, Locator } from '@playwright/test';
 
+export function getInputGroup(
+    frame: Frame,
+    formName: string,
+    label: string
+) {
+    return frame
+        .locator(`div.rb-input-group[data-form-name="${formName}"]`)
+        .filter({ has: frame.locator(`span.rb-input-group-label-text:text("${label}")`) });
+}
+
 export async function selectDropdownOption(
     frame: Frame,
     dropdownLocator: Locator,

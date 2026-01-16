@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { selectDropdownOption } from '../../../shared/utils/dropdown.js';
+import { getInputGroup, selectDropdownOption } from '../../../shared/utils/dropdown.js';
 
 export class PolicyAdminPage {
 
@@ -45,11 +45,7 @@ export class PolicyAdminPage {
 
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
 
-        // Locate "Manual Cover Note Used" input group
-        const manualCoverNoteUsedDropdown = this.frame
-            .locator('div.rb-input-group[data-form-name="editPolicyInfo"]')
-            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Manual Cover Note Used")') });
-
+        const manualCoverNoteUsedDropdown = getInputGroup(this.frame, 'editPolicyInfo', 'Manual Cover Note Used');
         await selectDropdownOption(this.frame, manualCoverNoteUsedDropdown, 'No');
     }
 
@@ -58,10 +54,7 @@ export class PolicyAdminPage {
 
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
 
-        // Locate "Primary Sales Channel" input group
-        const salesChannelDropdown = this.frame
-            .locator('div.rb-input-group[data-form-name="editPolicyInfo"]')
-            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Primary Sales Channel")') });
+        const salesChannelDropdown = getInputGroup(this.frame, 'editPolicyInfo', 'Primary Sales Channel');
 
         // Click on the dropdown wrapper
         await salesChannelDropdown.locator('.rb-input-wrapper.rb-tags').click();
@@ -94,17 +87,10 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        // Locate Customer Name input group within dialog
-        const customerSubTypeDropdown = dialog
-            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
-            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Sub-Type")') });
-
+        const customerSubTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'Customer Sub-Type');
         await selectDropdownOption(this.frame, customerSubTypeDropdown, 'N/A');
 
-        // Locate Customer Name input group within dialog
-        const customerNameTextField = dialog
-            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
-            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Name")') });
+        const customerNameTextField = getInputGroup(this.frame, 'CustomerManagement', 'Customer Name');
 
         // Fill in input field
         const customerNameInput = customerNameTextField.locator('input.rb-input');
@@ -112,10 +98,7 @@ export class PolicyAdminPage {
         await customerNameInput.fill('Hazim Kacak');
 
         // Locate Date of Birth input group within dialog
-        const dobDateInput = dialog
-            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
-            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Date of Birth")') });
-
+        const dobDateInput = getInputGroup(this.frame, 'CustomerManagement', 'Date of Birth');
         await dobDateInput.waitFor({ state: 'visible' });
         await dobDateInput.click();
 
