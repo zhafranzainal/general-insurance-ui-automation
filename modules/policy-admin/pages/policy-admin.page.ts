@@ -116,6 +116,14 @@ export class PolicyAdminPage {
 
         await dobDateInput.waitFor({ state: 'visible' });
         await dobDateInput.click();
+
+        // Ensure only if calendar popup is already visible
+        const calendarPopup = this.frame.locator('.rb-popup.rb-picker-popup:not(.rb-popup-hide)');
+        await calendarPopup.waitFor({ state: 'visible' });
+
+        // Locate the year button
+        const yearButton = calendarPopup.locator('.rb-picker-header-view button').nth(1);
+        await yearButton.click();
     }
 
 
