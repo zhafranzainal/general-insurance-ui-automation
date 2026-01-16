@@ -1,6 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
+import { selectDropdownOption } from '../../../shared/utils/dropdown.js';
 
 export class PolicyAdminPage {
 
@@ -49,13 +50,7 @@ export class PolicyAdminPage {
             .locator('div.rb-input-group[data-form-name="editPolicyInfo"]')
             .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Manual Cover Note Used")') });
 
-        // Click on the dropdown wrapper
-        await manualCoverNoteUsedDropdown.locator('.rb-input-wrapper.rb-tags').click();
-
-        // Wait for dropdown options to appear and select "No"
-        const optionNo = this.frame.locator('.rb-select-option[title="No"]');
-        await optionNo.waitFor({ state: 'visible' });
-        await optionNo.click();
+        await selectDropdownOption(this.frame, manualCoverNoteUsedDropdown, 'No');
     }
 
     async fillSalesChannelInfo() {
@@ -104,13 +99,7 @@ export class PolicyAdminPage {
             .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
             .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Sub-Type")') });
 
-        // Click on the dropdown wrapper
-        await customerSubTypeDropdown.locator('.rb-input-wrapper.rb-tags').click();
-
-        // Wait for dropdown options to appear then click
-        const optionNA = this.frame.locator('.rb-select-option[title="N/A"]');
-        await optionNA.waitFor({ state: 'visible' });
-        await optionNA.click();
+        await selectDropdownOption(this.frame, customerSubTypeDropdown, 'N/A');
 
         // Locate Customer Name input group within dialog
         const customerNameTextField = dialog
