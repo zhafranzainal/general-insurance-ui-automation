@@ -127,6 +127,7 @@ export class PolicyAdminPage {
 
         const prevYearButton = calendarPopup.locator('.rainbow.DoubleArrowLeft16-1');
         await prevYearButton.click();
+        await prevYearButton.click();
     }
 
 
