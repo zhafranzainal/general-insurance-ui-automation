@@ -7,6 +7,10 @@ export default defineConfig({
         baseURL: process.env.BASE_URL,
         headless: false, // start with visible browser
         screenshot: 'only-on-failure',
-        trace: 'retain-on-failure'
+        trace: 'retain-on-failure',
+        viewport: null,
+        launchOptions: {
+            args: ['--start-maximized'],
+        },
     },
 });
