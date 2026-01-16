@@ -100,6 +100,19 @@ export class PolicyAdminPage {
         await dialog.waitFor({ state: 'visible' });
 
         // Locate Customer Name input group within dialog
+        const customerSubTypeDropdown = dialog
+            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
+            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Sub-Type")') });
+
+        // Click on the dropdown wrapper
+        await customerSubTypeDropdown.locator('.rb-input-wrapper.rb-tags').click();
+
+        // Wait for dropdown options to appear then click
+        const optionNA = this.frame.locator('.rb-select-option[title="N/A"]');
+        await optionNA.waitFor({ state: 'visible' });
+        await optionNA.click();
+
+        // Locate Customer Name input group within dialog
         const customerNameTextField = dialog
             .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
             .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Customer Name")') });
