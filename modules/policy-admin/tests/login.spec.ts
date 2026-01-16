@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 import * as dotenv from 'dotenv';
+import { LoginPage } from '../../../shared/pages/login.page.js';
+
 dotenv.config();
 
 test('Login to InsureMO Sandbox', async ({ page }) => {
-    await page.goto(process.env.BASE_URL || '');
+    const loginPage = new LoginPage(page);
 
-    await page.fill('input[formcontrolname="username"]', process.env.GIMO_USER || '');
-    await page.fill('input[formcontrolname="password"]', process.env.GIMO_PASS || '');
-    await page.click('button:has-text("Login")');
+    await loginPage.goto();
+    await loginPage.login(process.env.GIMO_USER || '', process.env.GIMO_PASS || '');
 
     await expect(page).toHaveURL(process.env.BASE_URL + '#/');
 });
