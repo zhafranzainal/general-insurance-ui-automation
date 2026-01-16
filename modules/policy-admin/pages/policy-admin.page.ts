@@ -109,6 +109,13 @@ export class PolicyAdminPage {
         await customerNameInput.waitFor({ state: 'visible' });
         await customerNameInput.fill('Hazim Kacak');
 
+        // Locate Date of Birth input group within dialog
+        const dobDateInput = dialog
+            .locator('div.rb-input-group[data-form-name="CustomerManagement"]')
+            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Date of Birth")') });
+
+        await dobDateInput.waitFor({ state: 'visible' });
+        await dobDateInput.click();
     }
 
 
