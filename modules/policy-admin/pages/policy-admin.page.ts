@@ -77,6 +77,23 @@ export class PolicyAdminPage {
         await table.getByRole('radio').first().click();
     }
 
+    async fillParticipantInfo() {
+        this.frame = await getMicroAppFrame(this.page);
+
+        // Scope to "Participant Information" card
+        const participantCard = this.frame
+            .locator('.rb-card')
+            .filter({ has: this.frame.getByText('Participant Information', { exact: true }) });
+
+        await participantCard.waitFor({ state: 'visible' });
+
+        // Click Add button inside this card only
+        const addButton = participantCard.getByRole('button', { name: 'Add' });
+        await addButton.waitFor({ state: 'visible' });
+        await addButton.click();
+    }
+
+
     /** Submit policy inside the iframe */
     async submitPolicy() {
         await this.frame.click('button:has-text("Submit")');
