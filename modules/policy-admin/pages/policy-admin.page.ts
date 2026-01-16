@@ -54,7 +54,7 @@ export class PolicyAdminPage {
         await manualCoverNoteUsedDropdown.locator('.rb-input-wrapper.rb-tags').click();
 
         // Wait for dropdown options to appear and select "No"
-        const optionNo = this.frame.getByRole('option', { name: 'No' });
+        const optionNo = this.frame.locator('.rb-select-option[title="No"]');
         await optionNo.waitFor({ state: 'visible' });
         await optionNo.click();
     }
