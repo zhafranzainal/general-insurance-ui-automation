@@ -134,6 +134,10 @@ export class PolicyAdminPage {
         await year.click();
 
         await calendarPopup.locator('.rb-picker-cell[title="2000-01-01"]').click();
+
+        const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
+        await saveButton.waitFor({ state: 'visible' });
+        await saveButton.click();
     }
 
 
