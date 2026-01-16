@@ -128,6 +128,10 @@ export class PolicyAdminPage {
         const prevYearButton = calendarPopup.locator('.rainbow.DoubleArrowLeft16-1');
         await prevYearButton.click();
         await prevYearButton.click();
+
+        const year = calendarPopup.locator('.rb-picker-cell[title="2000"]');
+        await year.waitFor({ state: 'visible' });
+        await year.click();
     }
 
 
