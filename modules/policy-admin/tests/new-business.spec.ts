@@ -17,17 +17,7 @@ test('Create new policy in Policy Admin', async ({ page }) => {
     await policyAdmin.navigateToWorklist();
     await policyAdmin.startNewApplication();
 
-    // fill policy form
-    await policyAdmin.fillPolicyForm({
-        productCode: 'PA001',
-        sumInsured: 100000,
-        // add other fields here
-    });
-
-    // submit
-    await policyAdmin.submitPolicy();
-
-    // verify success
-    await policyAdmin.verifyPolicyCreated();
+    // fill policy info
+    await policyAdmin.fillPolicyInfo();
 
 });

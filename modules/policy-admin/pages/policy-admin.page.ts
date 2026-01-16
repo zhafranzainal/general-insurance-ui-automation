@@ -1,5 +1,6 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
+import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
 
 export class PolicyAdminPage {
 
@@ -14,11 +15,7 @@ export class PolicyAdminPage {
         await this.sideMenu.openCertificateAdmin();
         await this.sideMenu.openWorklist();
 
-        // Wait for iframe to appear and get frame handle
-        const iframeElement = await this.page.locator('#micro-app-iframe').elementHandle();
-        if (!iframeElement) throw new Error('Micro app iframe not found!');
-        this.frame = await iframeElement.contentFrame() as Frame;
-        if (!this.frame) throw new Error('Failed to get contentFrame from iframe');
+        this.frame = await getMicroAppFrame(this.page);
 
         // Wait for "New Application" button inside iframe
         await this.frame.getByRole('button', { name: 'New Application' }).waitFor();
@@ -42,11 +39,24 @@ export class PolicyAdminPage {
         await targetRow.locator('button.rb-btn-type-link.rb-icon-btn').click();
     }
 
-    async fillPolicyForm(policyData: { productCode: string; sumInsured: number }) {
-        await this.frame.fill('input[formcontrolname="productCode"]', policyData.productCode);
-        await this.frame.fill('input[formcontrolname="sumInsured"]', policyData.sumInsured.toString());
+    async fillPolicyInfo() {
 
-        // TODO: fill remaining mandatory fields inside iframe
+        this.frame = await getMicroAppFrame(this.page);
+
+        await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
+
+        // Locate "Manual Cover Note Used" input group
+        const manualCoverNoteUsedDropdown = this.frame
+            .locator('div.rb-input-group[data-form-name="editPolicyInfo"]')
+            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Manual Cover Note Used")') });
+
+        // Click on the dropdown wrapper
+        await manualCoverNoteUsedDropdown.locator('.rb-input-wrapper.rb-tags').click();
+
+        // Wait for dropdown options to appear and select "No"
+        const optionNo = this.frame.getByRole('option', { name: 'No' });
+        await optionNo.waitFor({ state: 'visible' });
+        await optionNo.click();
     }
 
     /** Submit policy inside the iframe */
