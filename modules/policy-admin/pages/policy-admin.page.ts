@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { getInputGroup, selectDropdownOption } from '../../../shared/utils/dropdown.js';
+import { getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
 
 export class PolicyAdminPage {
 
