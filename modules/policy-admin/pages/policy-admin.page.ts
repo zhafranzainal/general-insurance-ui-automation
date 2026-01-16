@@ -40,7 +40,6 @@ export class PolicyAdminPage {
     }
 
     async fillPolicyInfo() {
-
         this.frame = await getMicroAppFrame(this.page);
 
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
@@ -57,6 +56,25 @@ export class PolicyAdminPage {
         const optionNo = this.frame.locator('.rb-select-option[title="No"]');
         await optionNo.waitFor({ state: 'visible' });
         await optionNo.click();
+    }
+
+    async fillSalesChannelInfo() {
+        this.frame = await getMicroAppFrame(this.page);
+
+        await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
+
+        // Locate "Primary Sales Channel" input group
+        const salesChannelDropdown = this.frame
+            .locator('div.rb-input-group[data-form-name="editPolicyInfo"]')
+            .filter({ has: this.frame.locator('span.rb-input-group-label-text:text("Primary Sales Channel")') });
+
+        // Click on the dropdown wrapper
+        await salesChannelDropdown.locator('.rb-input-wrapper.rb-tags').click();
+
+        // Wait for dropdown table to appear and select radio button in first row
+        const table = this.frame.locator('.rb-table-row');
+        await table.first().waitFor({ state: 'visible' });
+        await table.getByRole('radio').first().click();
     }
 
     /** Submit policy inside the iframe */

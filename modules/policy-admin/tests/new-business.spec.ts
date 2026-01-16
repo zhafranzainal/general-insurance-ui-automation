@@ -17,7 +17,8 @@ test('Create new policy in Policy Admin', async ({ page }) => {
     await policyAdmin.navigateToWorklist();
     await policyAdmin.startNewApplication();
 
-    // fill policy info
+    // certificate information
     await policyAdmin.fillPolicyInfo();
+    await policyAdmin.fillSalesChannelInfo();
 
 });
