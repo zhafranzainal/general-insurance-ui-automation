@@ -10,7 +10,10 @@ export default defineConfig({
         trace: 'retain-on-failure',
         viewport: null,
         launchOptions: {
-            args: ['--start-maximized'],
-        },
+            args: [
+                '--start-maximized',
+                '--force-device-scale-factor=0.95'
+            ]
+        }
     },
 });
