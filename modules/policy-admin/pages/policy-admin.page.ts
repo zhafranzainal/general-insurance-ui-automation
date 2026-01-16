@@ -91,6 +91,18 @@ export class PolicyAdminPage {
         const addButton = participantCard.getByRole('button', { name: 'Add' });
         await addButton.waitFor({ state: 'visible' });
         await addButton.click();
+
+        // Scope to the dialog by title
+        const dialog = this.frame
+            .locator('.rb-dialog-body-content')
+            .filter({ has: this.frame.getByText('Customer Information Detail', { exact: true }) });
+
+        await dialog.waitFor({ state: 'visible' });
+
+        // Click Search button inside this dialog
+        const searchButton = dialog.getByRole('button', { name: 'Search' });
+        await searchButton.waitFor({ state: 'visible' });
+        await searchButton.click();
     }
 
 
