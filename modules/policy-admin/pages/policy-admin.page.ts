@@ -26,7 +26,20 @@ export class PolicyAdminPage {
 
     async startNewApplication() {
         await this.frame.getByRole('button', { name: 'New Application' }).click();
-        await this.frame.waitForSelector('form');
+
+        // Wait for dialog to appear
+        const dialog = this.frame.locator('div.rb-dialog-body-content:has-text("New Application")');
+        await dialog.waitFor({ state: 'visible' });
+
+        // Locate "Product Code" cell inside dialog table
+        const mpCell = dialog.getByRole('cell', { name: 'MP', exact: true });
+        await mpCell.waitFor({ state: 'visible' });
+
+        // Get the parent row of that cell
+        const targetRow = mpCell.locator('xpath=ancestor::tr');
+
+        // Click the "New Application" action button in that row
+        await targetRow.locator('button.rb-btn-type-link.rb-icon-btn').click();
     }
 
     async fillPolicyForm(policyData: { productCode: string; sumInsured: number }) {
