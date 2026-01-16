@@ -90,6 +90,9 @@ export class PolicyAdminPage {
         const customerSubTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'Customer Sub-Type');
         await selectDropdownOption(this.frame, customerSubTypeDropdown, 'N/A');
 
+        const idTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'ID Type');
+        await selectDropdownOption(this.frame, idTypeDropdown, 'Citizen ID Card (Yellow)');
+
         const customerNameTextField = getInputGroup(this.frame, 'CustomerManagement', 'Customer Name');
 
         // Fill in input field

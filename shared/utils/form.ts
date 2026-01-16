@@ -7,7 +7,8 @@ export function getInputGroup(
 ) {
     return frame
         .locator(`div.rb-input-group[data-form-name="${formName}"]`)
-        .filter({ has: frame.locator(`span.rb-input-group-label-text:text("${label}")`) });
+        .filter({ has: frame.locator(`span.rb-input-group-label-text:text("${label}")`) })
+        .first();
 }
 
 export async function selectDropdownOption(
