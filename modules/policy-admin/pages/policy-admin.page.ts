@@ -124,6 +124,9 @@ export class PolicyAdminPage {
         // Locate the year button
         const yearButton = calendarPopup.locator('.rb-picker-header-view button').nth(1);
         await yearButton.click();
+
+        const prevYearButton = calendarPopup.locator('.rainbow.DoubleArrowLeft16-1');
+        await prevYearButton.click();
     }
 
 
