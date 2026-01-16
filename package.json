@@ -1,6 +1,7 @@
 {
   "name": "general-insurance-ui-automation",
   "version": "1.0.0",
+  "type": "module",
   "description": "UI automation framework for General Insurance systems using Playwright and TypeScript.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9",
     "typescript": "^5.9.3"
   }
 }
