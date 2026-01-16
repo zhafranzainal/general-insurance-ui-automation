@@ -132,6 +132,8 @@ export class PolicyAdminPage {
         const year = calendarPopup.locator('.rb-picker-cell[title="2000"]');
         await year.waitFor({ state: 'visible' });
         await year.click();
+
+        await calendarPopup.locator('.rb-picker-cell[title="2000-01-01"]').click();
     }
 
 
