@@ -97,6 +97,9 @@ export class PolicyAdminPage {
         const idNoTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.');
         await fillTextField(idNoTextField, '12345');
 
+        const TitleDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title');
+        await selectDropdownOption(this.frame, TitleDropdown, 'Awang');
+
         const customerNameTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name');
         await fillTextField(customerNameTextField, 'Hazim Kacak');
 
