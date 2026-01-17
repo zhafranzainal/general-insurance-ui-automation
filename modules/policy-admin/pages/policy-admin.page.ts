@@ -1,8 +1,13 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { clickButtonInBoxFooter, clickButtonInCard, fillTextField, getInputGroup, selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
 import { FORM_NAMES } from '../data/formNames.js';
+
+import {
+    clickButtonInBoxFooter, clickButtonInCard, clickButtonInDialog,
+    fillTextField, getInputGroup,
+    selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable
+} from '../../../shared/utils/form.js';
 
 export class PolicyAdminPage {
 
@@ -136,13 +141,7 @@ export class PolicyAdminPage {
 
     async clickOkInQuotationDialog() {
         this.frame = await getMicroAppFrame(this.page);
-
-        const dialog = this.frame.locator('div.rb-dialog-body:has-text("Generate Quotation Slip")');
-        await dialog.waitFor({ state: 'visible' });
-
-        const okButton = dialog.locator('div.rb-dialog-footer button:has-text("OK")');
-        await okButton.waitFor({ state: 'visible' });
-        await okButton.click();
+        clickButtonInDialog(this.frame, 'Generate Quotation Slip', 'OK');
     }
 
     async clickIssue() {

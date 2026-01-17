@@ -141,10 +141,22 @@ export async function selectDropdownOptionInTable(
 
 export async function clickButtonInBoxFooter(
     frame: Frame,
-    buttonText: string,
+    buttonText: string
 ) {
     const button = frame.locator(`button:has-text("${buttonText}")`);
     await button.waitFor({ state: 'visible' });
     await button.click();
 }
 
+export async function clickButtonInDialog(
+    frame: Frame,
+    dialogTitle: string,
+    buttonText: string
+) {
+    const dialog = frame.locator(`div.rb-dialog-body:has-text("${dialogTitle}")`);
+    await dialog.waitFor({ state: 'visible' });
+
+    const okButton = dialog.locator(`div.rb-dialog-footer button:has-text("${buttonText}")`);
+    await okButton.waitFor({ state: 'visible' });
+    await okButton.click();
+}
