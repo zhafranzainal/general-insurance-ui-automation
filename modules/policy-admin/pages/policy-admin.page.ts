@@ -2,6 +2,7 @@ import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
 import { fillTextField, getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
+import { FORM_NAMES } from '../data/formNames.js';
 
 export class PolicyAdminPage {
 
@@ -45,7 +46,7 @@ export class PolicyAdminPage {
 
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
 
-        const manualCoverNoteUsedDropdown = getInputGroup(this.frame, 'editPolicyInfo', 'Manual Cover Note Used');
+        const manualCoverNoteUsedDropdown = getInputGroup(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used');
         await selectDropdownOption(this.frame, manualCoverNoteUsedDropdown, 'No');
     }
 
@@ -54,7 +55,7 @@ export class PolicyAdminPage {
 
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
 
-        const salesChannelDropdown = getInputGroup(this.frame, 'editPolicyInfo', 'Primary Sales Channel');
+        const salesChannelDropdown = getInputGroup(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Primary Sales Channel');
 
         // Click on the dropdown wrapper
         await salesChannelDropdown.locator('.rb-input-wrapper.rb-tags').click();
@@ -87,20 +88,20 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        const customerSubTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'Customer Sub-Type');
+        const customerSubTypeDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type');
         await selectDropdownOption(this.frame, customerSubTypeDropdown, 'N/A');
 
-        const idTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'ID Type');
+        const idTypeDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type');
         await selectDropdownOption(this.frame, idTypeDropdown, 'Citizen ID Card (Yellow)');
 
-        const idNoTextField = getInputGroup(this.frame, 'CustomerManagement', 'ID No.');
+        const idNoTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.');
         await fillTextField(idNoTextField, '12345');
 
-        const customerNameTextField = getInputGroup(this.frame, 'CustomerManagement', 'Customer Name');
+        const customerNameTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name');
         await fillTextField(customerNameTextField, 'Hazim Kacak');
 
         // Locate Date of Birth input group within dialog
-        const dobDateInput = getInputGroup(this.frame, 'CustomerManagement', 'Date of Birth');
+        const dobDateInput = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth');
         await dobDateInput.waitFor({ state: 'visible' });
         await dobDateInput.click();
 
