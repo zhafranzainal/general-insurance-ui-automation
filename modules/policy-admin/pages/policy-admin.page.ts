@@ -123,6 +123,15 @@ export class PolicyAdminPage {
 
         await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', 'BND123');
 
+        const registrationYearInput = getInputGroup(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year');
+        await registrationYearInput.waitFor({ state: 'visible' });
+        await registrationYearInput.click();
+
+        // Ensure only if calendar popup is already visible
+        const registrationYearPopup = this.frame.locator('.rb-popup.rb-picker-popup:not(.rb-popup-hide)');
+        await registrationYearPopup.waitFor({ state: 'visible' });
+        await registrationYearPopup.locator('.rb-picker-cell[title="2020"]').click();
+
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Make', 'Audi');
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Model', 'Audi A3 1.2');
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Manufacture Year', '2020');
