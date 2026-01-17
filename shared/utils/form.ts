@@ -28,3 +28,12 @@ export async function selectDropdownOption(
     await option.waitFor({ state: 'visible' });
     await option.click();
 }
+
+export async function fillTextField(
+    textFieldlocator: Locator,
+    value: string
+) {
+    const input = textFieldlocator.locator('input.rb-input');
+    await input.waitFor({ state: 'visible' });
+    await input.fill(value);
+}

@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
+import { fillTextField, getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
 
 export class PolicyAdminPage {
 
@@ -94,18 +94,10 @@ export class PolicyAdminPage {
         await selectDropdownOption(this.frame, idTypeDropdown, 'Citizen ID Card (Yellow)');
 
         const idNoTextField = getInputGroup(this.frame, 'CustomerManagement', 'ID No.');
-
-        // Fill in input field
-        const idNoInput = idNoTextField.locator('input.rb-input');
-        await idNoInput.waitFor({ state: 'visible' });
-        await idNoInput.fill('12345');
+        await fillTextField(idNoTextField, '12345');
 
         const customerNameTextField = getInputGroup(this.frame, 'CustomerManagement', 'Customer Name');
-
-        // Fill in input field
-        const customerNameInput = customerNameTextField.locator('input.rb-input');
-        await customerNameInput.waitFor({ state: 'visible' });
-        await customerNameInput.fill('Hazim Kacak');
+        await fillTextField(customerNameTextField, 'Hazim Kacak');
 
         // Locate Date of Birth input group within dialog
         const dobDateInput = getInputGroup(this.frame, 'CustomerManagement', 'Date of Birth');
