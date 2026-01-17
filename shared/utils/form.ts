@@ -10,15 +10,10 @@ export function getInputGroup(
         .filter({ has: frame.getByText(label, { exact: true }) });
 }
 
-export async function selectDropdownOption(
+async function selectOptionFromOpenPopup(
     frame: Frame,
-    formName: string,
-    label: string,
     optionTitle: string
 ) {
-    // Click dropdown wrapper
-    await getInputGroup(frame, formName, label).locator('.rb-input-wrapper.rb-tags').click();
-
     // Wait for visible select popup
     const popup = frame.locator('.rb-popup.rb-select-popup:not(.rb-popup-hide)');
     await popup.waitFor({ state: 'visible' });
@@ -27,6 +22,17 @@ export async function selectDropdownOption(
     const option = popup.locator(`.rb-select-option[title="${optionTitle}"]`);
     await option.waitFor({ state: 'visible' });
     await option.click();
+}
+
+export async function selectDropdownOption(
+    frame: Frame,
+    formName: string,
+    label: string,
+    optionTitle: string
+) {
+    // Click dropdown wrapper
+    await getInputGroup(frame, formName, label).locator('.rb-input-wrapper.rb-tags').click();
+    await selectOptionFromOpenPopup(frame, optionTitle);
 }
 
 export async function fillTextField(
@@ -62,9 +68,9 @@ export async function selectDropdownOptionInTable(
     label: string,
     optionTitle: string
 ) {
-    const card = frame.locator('.rb-card').filter({
-        has: frame.locator('.rb-card-header-title', { hasText: cardTitle })
-    });
+    const card = frame
+        .locator('.rb-card')
+        .filter({ has: frame.locator('.rb-card-header-title', { hasText: cardTitle }) });
 
     const table = card.locator('table.rb-table-content');
     const headers = table.locator('thead th');
@@ -83,13 +89,5 @@ export async function selectDropdownOptionInTable(
 
     const row = table.locator('tbody tr.rb-table-row').first();
     await row.locator('td').nth(index).locator('.rb-input-wrapper.rb-tags').click();
-
-    // Wait for visible select popup
-    const popup = frame.locator('.rb-popup.rb-select-popup:not(.rb-popup-hide)');
-    await popup.waitFor({ state: 'visible' });
-
-    // Click desired option
-    const option = popup.locator(`.rb-select-option[title="${optionTitle}"]`);
-    await option.waitFor({ state: 'visible' });
-    await option.click();
+    await selectOptionFromOpenPopup(frame, optionTitle);
 }
