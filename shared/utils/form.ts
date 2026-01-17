@@ -148,6 +148,20 @@ export async function clickButtonInBoxFooter(
     await button.click();
 }
 
+export async function fillTextFieldInDialog(
+    frame: Frame,
+    dialogTitle: string,
+    label: string,
+    value: string
+) {
+    const dialog = frame.locator(`div.rb-dialog-body:has-text("${dialogTitle}")`);
+    await dialog.waitFor({ state: 'visible' });
+
+    const emailInput = dialog.locator(`.rb-input-group:has(.rb-input-group-label-text:text-is("${label}")) input.rb-input`);
+    await emailInput.waitFor({ state: 'visible' });
+    await emailInput.fill(value);
+}
+
 export async function clickButtonInDialog(
     frame: Frame,
     dialogTitle: string,

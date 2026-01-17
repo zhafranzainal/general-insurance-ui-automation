@@ -5,7 +5,7 @@ import { FORM_NAMES } from '../data/formNames.js';
 
 import {
     clickButtonInBoxFooter, clickButtonInCard, clickButtonInDialog,
-    fillTextField, getInputGroup,
+    fillTextField, fillTextFieldInDialog, getInputGroup,
     selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable
 } from '../../../shared/utils/form.js';
 
@@ -140,6 +140,7 @@ export class PolicyAdminPage {
         this.frame = await getMicroAppFrame(this.page);
         await clickButtonInBoxFooter(this.frame, 'Calculate');
         await clickButtonInBoxFooter(this.frame, 'Buy');
+        await fillTextFieldInDialog(this.frame, 'Generate Quotation Slip', 'Email', 'test@example.com');
         await clickButtonInDialog(this.frame, 'Generate Quotation Slip', 'OK');
         await clickButtonInBoxFooter(this.frame, 'Issue');
     }
