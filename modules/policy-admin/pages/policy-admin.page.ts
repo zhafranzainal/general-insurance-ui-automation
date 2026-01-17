@@ -138,6 +138,24 @@ export class PolicyAdminPage {
         await calculateButton.click();
     }
 
+    async clickOkInQuotationDialog() {
+        this.frame = await getMicroAppFrame(this.page);
+
+        const dialog = this.frame.locator('div.rb-dialog-body:has-text("Generate Quotation Slip")');
+        await dialog.waitFor({ state: 'visible' });
+
+        const okButton = dialog.locator('div.rb-dialog-footer button:has-text("OK")');
+        await okButton.waitFor({ state: 'visible' });
+        await okButton.click();
+    }
+
+    async clickIssue() {
+        this.frame = await getMicroAppFrame(this.page);
+        const calculateButton = this.frame.locator('button:has-text("Issue")');
+        await calculateButton.waitFor({ state: 'visible' });
+        await calculateButton.click();
+    }
+
     /** Submit policy inside the iframe */
     async submitPolicy() {
         await this.frame.click('button:has-text("Submit")');

@@ -25,5 +25,7 @@ test('Create new policy in Policy Admin', async ({ page }) => {
     await policyAdmin.fillVehicleInfo();
     await policyAdmin.clickCalculate();
     await policyAdmin.clickBuy();
+    await policyAdmin.clickOkInQuotationDialog();
+    await policyAdmin.clickIssue();
 
 });
