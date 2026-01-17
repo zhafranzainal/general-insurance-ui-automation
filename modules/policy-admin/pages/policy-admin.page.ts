@@ -93,6 +93,13 @@ export class PolicyAdminPage {
         const idTypeDropdown = getInputGroup(this.frame, 'CustomerManagement', 'ID Type');
         await selectDropdownOption(this.frame, idTypeDropdown, 'Citizen ID Card (Yellow)');
 
+        const idNoTextField = getInputGroup(this.frame, 'CustomerManagement', 'ID No.');
+
+        // Fill in input field
+        const idNoInput = idNoTextField.locator('input.rb-input');
+        await idNoInput.waitFor({ state: 'visible' });
+        await idNoInput.fill('12345');
+
         const customerNameTextField = getInputGroup(this.frame, 'CustomerManagement', 'Customer Name');
 
         // Fill in input field
