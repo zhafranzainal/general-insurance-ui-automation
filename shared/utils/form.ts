@@ -55,3 +55,41 @@ export async function clickButtonInCard(
     await button.waitFor({ state: 'visible' });
     await button.click();
 }
+
+export async function selectDropdownOptionInTable(
+    frame: Frame,
+    cardTitle: string,
+    label: string,
+    optionTitle: string
+) {
+    const card = frame.locator('.rb-card').filter({
+        has: frame.locator('.rb-card-header-title', { hasText: cardTitle })
+    });
+
+    const table = card.locator('table.rb-table-content');
+    const headers = table.locator('thead th');
+    const count = await headers.count();
+
+    let index = -1;
+    for (let i = 0; i < count; i++) {
+        const text = await headers.nth(i).locator('.rb-table-title').innerText();
+        if (text.trim() === label) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index === -1) throw new Error(`${label} column not found`);
+
+    const row = table.locator('tbody tr.rb-table-row').first();
+    await row.locator('td').nth(index).locator('.rb-input-wrapper.rb-tags').click();
+
+    // Wait for visible select popup
+    const popup = frame.locator('.rb-popup.rb-select-popup:not(.rb-popup-hide)');
+    await popup.waitFor({ state: 'visible' });
+
+    // Click desired option
+    const option = popup.locator(`.rb-select-option[title="${optionTitle}"]`);
+    await option.waitFor({ state: 'visible' });
+    await option.click();
+}

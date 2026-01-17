@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { clickButtonInCard, fillTextField, getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
+import { clickButtonInCard, fillTextField, getInputGroup, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
 import { FORM_NAMES } from '../data/formNames.js';
 
 export class PolicyAdminPage {
@@ -119,6 +119,7 @@ export class PolicyAdminPage {
         await saveButton.click();
 
         await clickButtonInCard(this.frame, 'Authorised Driver', 'Copy Vehicle Owner');
+        await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', 'Self',);
     }
 
 
