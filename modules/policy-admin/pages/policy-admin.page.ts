@@ -129,29 +129,12 @@ export class PolicyAdminPage {
 
     }
 
-    async clickCalculate() {
+    async submitPolicy() {
         this.frame = await getMicroAppFrame(this.page);
         await clickButtonInBoxFooter(this.frame, 'Calculate');
-    }
-
-    async clickBuy() {
-        this.frame = await getMicroAppFrame(this.page);
         await clickButtonInBoxFooter(this.frame, 'Buy');
-    }
-
-    async clickOkInQuotationDialog() {
-        this.frame = await getMicroAppFrame(this.page);
-        clickButtonInDialog(this.frame, 'Generate Quotation Slip', 'OK');
-    }
-
-    async clickIssue() {
-        this.frame = await getMicroAppFrame(this.page);
+        await clickButtonInDialog(this.frame, 'Generate Quotation Slip', 'OK');
         await clickButtonInBoxFooter(this.frame, 'Issue');
-    }
-
-    /** Submit policy inside the iframe */
-    async submitPolicy() {
-        await this.frame.click('button:has-text("Submit")');
     }
 
     /** Verify policy creation inside the iframe */
