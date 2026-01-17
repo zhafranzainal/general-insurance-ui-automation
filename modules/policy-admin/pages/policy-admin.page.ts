@@ -127,6 +127,18 @@ export class PolicyAdminPage {
         const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
         await saveButton.waitFor({ state: 'visible' });
         await saveButton.click();
+
+        // Scope to "Participant Information" card
+        const driverCard = this.frame
+            .locator('.rb-card')
+            .filter({ has: this.frame.getByText('Authorised Driver', { exact: true }) });
+
+        await driverCard.waitFor({ state: 'visible' });
+
+        // Click copy button inside this card only
+        const copyButton = driverCard.getByRole('button', { name: 'Copy Vehicle Owner' });
+        await copyButton.waitFor({ state: 'visible' });
+        await copyButton.click();
     }
 
 
