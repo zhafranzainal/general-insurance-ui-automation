@@ -31,10 +31,12 @@ export async function selectDropdownOption(
 }
 
 export async function fillTextField(
-    textFieldlocator: Locator,
+    frame: Frame,
+    formName: string,
+    label: string,
     value: string
 ) {
-    const input = textFieldlocator.locator('input.rb-input');
+    const input = getInputGroup(frame, formName, label).locator('input.rb-input');
     await input.waitFor({ state: 'visible' });
     await input.fill(value);
 }

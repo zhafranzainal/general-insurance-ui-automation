@@ -87,14 +87,9 @@ export class PolicyAdminPage {
 
         await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', 'N/A');
         await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', 'Citizen ID Card (Yellow)');
-
-        const idNoTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.');
-        await fillTextField(idNoTextField, '12345');
-
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.', '12345');
         await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', 'Awang');
-
-        const customerNameTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name');
-        await fillTextField(customerNameTextField, 'Hazim Kacak');
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', 'Hazim Kacak');
 
         // Locate Date of Birth input group within dialog
         const dobDateInput = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth');
