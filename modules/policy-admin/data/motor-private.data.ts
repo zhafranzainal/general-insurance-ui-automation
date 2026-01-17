@@ -1,4 +1,6 @@
-export const MOTOR_PRIVATE_DATA = {
+import type { MotorPrivateData } from "../../../shared/models/motor-private.js";
+
+export const MOTOR_PRIVATE_DATA: MotorPrivateData = {
 
     vehicle: {
         vehicleNo: 'BND1234',
