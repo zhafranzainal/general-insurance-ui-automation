@@ -128,7 +128,7 @@ export class PolicyAdminPage {
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Usage', MOTOR_PRIVATE_DATA.vehicle.usage);
     }
 
-    async submitPolicy() {
+    async submitProposal() {
         this.frame = await getMicroAppFrame(this.page);
         await clickButtonInBoxFooter(this.frame, 'Calculate');
         await clickButtonInBoxFooter(this.frame, 'Buy');
