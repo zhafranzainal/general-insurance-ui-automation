@@ -96,10 +96,16 @@ export class PolicyAdminPage {
         const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
         await saveButton.waitFor({ state: 'visible' });
         await saveButton.click();
+    }
 
+    async fillDriverInfo() {
+        this.frame = await getMicroAppFrame(this.page);
         await clickButtonInCard(this.frame, 'Authorised Driver', 'Copy Vehicle Owner');
         await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', 'Self',);
+    }
 
+    async fillVehicleInfo() {
+        this.frame = await getMicroAppFrame(this.page);
         await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', 'BND123');
         await selectCalendarYear(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year', 2020);
 
@@ -110,9 +116,7 @@ export class PolicyAdminPage {
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Battery Capacity', '0');
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Plan Name', 'Motor Private (3P Basic)');
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'NCB', '0%');
-
     }
-
 
     /** Submit policy inside the iframe */
     async submitPolicy() {
