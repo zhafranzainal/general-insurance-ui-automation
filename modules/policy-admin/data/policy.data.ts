@@ -5,9 +5,9 @@ export const POLICY_BASE_DATA = {
     participant: {
         customerSubType: 'N/A',
         idType: 'Citizen ID Card (Yellow)',
-        idNo: '9005121234',
+        idNo: '900',
         title: 'Awang',
-        name: 'Awang Haji Ahmad bin Ali',
+        name: 'Hazim Hensem',
         dob: '2000-01-01',
         gender: 'Male',
         contactNo: '6731234567',
