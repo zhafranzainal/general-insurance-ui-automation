@@ -155,11 +155,11 @@ export class PolicyAdminPage {
 
         // Extract certificate number
         const certMatch = messageText.match(/Certificate No\.\s*:\s*(\S+)/);
-        if (!certMatch) {
+        if (!certMatch || !certMatch[1]) {
             throw new Error('Certificate number not found in success message');
         }
 
-        const certificateNo = certMatch[1];
+        const certificateNo: string = certMatch[1];
 
         // Verify buttons exist
         await dialog.locator('button:has-text("Return to Home Page")').waitFor({ state: 'visible' });
