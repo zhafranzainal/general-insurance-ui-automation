@@ -10,6 +10,53 @@ export function getInputGroup(
         .filter({ has: frame.getByText(label, { exact: true }) });
 }
 
+async function openDatePicker(
+    frame: Frame,
+    formName: string,
+    label: string
+) {
+    const inputGroup = getInputGroup(frame, formName, label);
+    await inputGroup.waitFor({ state: 'visible' });
+    await inputGroup.click();
+
+    const popup = frame.locator('.rb-popup.rb-picker-popup:not(.rb-popup-hide)');
+    await popup.waitFor({ state: 'visible' });
+    return popup;
+}
+
+export async function selectCalendarDate(
+    frame: Frame,
+    formName: string,
+    label: string,
+    dateISO: string
+) {
+    const year = dateISO.split('-')[0];
+    const popup = await openDatePicker(frame, formName, label);
+
+    // Locate the year button
+    const yearButton = popup.locator('.rb-picker-header-view button').nth(1);
+    await yearButton.click();
+
+    // Navigate backward (example logic preserved)
+    const prevYearButton = popup.locator('.rainbow.DoubleArrowLeft16-1');
+    await prevYearButton.click();
+    await prevYearButton.click();
+
+    // Select year and date
+    await popup.locator(`.rb-picker-cell[title="${year}"]`).click();
+    await popup.locator(`.rb-picker-cell[title="${dateISO}"]`).click();
+}
+
+export async function selectCalendarYear(
+    frame: Frame,
+    formName: string,
+    label: string,
+    year: number
+) {
+    const popup = await openDatePicker(frame, formName, label);
+    await popup.locator(`.rb-picker-cell[title="${year}"]`).click();
+}
+
 async function selectOptionFromOpenPopup(
     frame: Frame,
     optionTitle: string

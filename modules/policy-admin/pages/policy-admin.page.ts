@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { clickButtonInCard, fillTextField, getInputGroup, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
+import { clickButtonInCard, fillTextField, getInputGroup, selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
 import { FORM_NAMES } from '../data/formNames.js';
 
 export class PolicyAdminPage {
@@ -81,28 +81,7 @@ export class PolicyAdminPage {
         await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', 'Awang');
         await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', 'Hazim Kacak');
 
-        // Locate Date of Birth input group within dialog
-        const dobDateInput = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth');
-        await dobDateInput.waitFor({ state: 'visible' });
-        await dobDateInput.click();
-
-        // Ensure only if calendar popup is already visible
-        const calendarPopup = this.frame.locator('.rb-popup.rb-picker-popup:not(.rb-popup-hide)');
-        await calendarPopup.waitFor({ state: 'visible' });
-
-        // Locate the year button
-        const yearButton = calendarPopup.locator('.rb-picker-header-view button').nth(1);
-        await yearButton.click();
-
-        const prevYearButton = calendarPopup.locator('.rainbow.DoubleArrowLeft16-1');
-        await prevYearButton.click();
-        await prevYearButton.click();
-
-        const year = calendarPopup.locator('.rb-picker-cell[title="2000"]');
-        await year.waitFor({ state: 'visible' });
-        await year.click();
-
-        await calendarPopup.locator('.rb-picker-cell[title="2000-01-01"]').click();
+        await selectCalendarDate(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth', '2000-01-01');
 
         await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', 'Male');
         await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', '60171234567');
@@ -122,15 +101,7 @@ export class PolicyAdminPage {
         await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', 'Self',);
 
         await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', 'BND123');
-
-        const registrationYearInput = getInputGroup(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year');
-        await registrationYearInput.waitFor({ state: 'visible' });
-        await registrationYearInput.click();
-
-        // Ensure only if calendar popup is already visible
-        const registrationYearPopup = this.frame.locator('.rb-popup.rb-picker-popup:not(.rb-popup-hide)');
-        await registrationYearPopup.waitFor({ state: 'visible' });
-        await registrationYearPopup.locator('.rb-picker-cell[title="2020"]').click();
+        await selectCalendarYear(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year', 2020);
 
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Make', 'Audi');
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Model', 'Audi A3 1.2');
