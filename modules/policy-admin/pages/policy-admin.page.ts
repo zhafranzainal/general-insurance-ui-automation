@@ -131,6 +131,13 @@ export class PolicyAdminPage {
         await calculateButton.click();
     }
 
+    async clickBuy() {
+        this.frame = await getMicroAppFrame(this.page);
+        const calculateButton = this.frame.locator('button:has-text("Buy")');
+        await calculateButton.waitFor({ state: 'visible' });
+        await calculateButton.click();
+    }
+
     /** Submit policy inside the iframe */
     async submitPolicy() {
         await this.frame.click('button:has-text("Submit")');
