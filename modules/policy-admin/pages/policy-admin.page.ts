@@ -114,6 +114,9 @@ export class PolicyAdminPage {
 
         await calendarPopup.locator('.rb-picker-cell[title="2000-01-01"]').click();
 
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', 'Male');
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', '60171234567');
+
         const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
         await saveButton.waitFor({ state: 'visible' });
         await saveButton.click();
