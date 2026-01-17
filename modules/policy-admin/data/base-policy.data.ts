@@ -1,4 +1,6 @@
-export const POLICY_BASE_DATA = {
+import type { BasePolicyData } from "../../../shared/models/base-policy.js";
+
+export const BASE_POLICY_DATA: BasePolicyData = {
 
     manualCoverNoteUsed: 'No',
 

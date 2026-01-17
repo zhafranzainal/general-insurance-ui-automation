@@ -8,7 +8,7 @@ import {
     fillTextField, getInputGroup,
     selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable
 } from '../../../shared/utils/form.js';
-import { POLICY_BASE_DATA } from '../data/policy.data.js';
+import { BASE_POLICY_DATA } from '../data/base-policy.data.js';
 import { MOTOR_PRIVATE_DATA } from '../data/motor-private.data.js';
 
 export class PolicyAdminPage {
@@ -51,7 +51,7 @@ export class PolicyAdminPage {
     async fillPolicyInfo() {
         this.frame = await getMicroAppFrame(this.page);
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used', POLICY_BASE_DATA.manualCoverNoteUsed);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used', BASE_POLICY_DATA.manualCoverNoteUsed);
     }
 
     async fillSalesChannelInfo() {
@@ -82,21 +82,21 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', POLICY_BASE_DATA.participant.customerSubType);
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', POLICY_BASE_DATA.participant.idType);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.', POLICY_BASE_DATA.participant.idNo);
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', POLICY_BASE_DATA.participant.title);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', POLICY_BASE_DATA.participant.name);
-        await selectCalendarDate(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth', POLICY_BASE_DATA.participant.dob);
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', POLICY_BASE_DATA.participant.gender);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', POLICY_BASE_DATA.participant.contactNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', BASE_POLICY_DATA.participant.customerSubType);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', BASE_POLICY_DATA.participant.idType);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.', BASE_POLICY_DATA.participant.idNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', BASE_POLICY_DATA.participant.title);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', BASE_POLICY_DATA.participant.name);
+        await selectCalendarDate(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth', BASE_POLICY_DATA.participant.dob);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', BASE_POLICY_DATA.participant.gender);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', BASE_POLICY_DATA.participant.contactNo);
 
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person Name', POLICY_BASE_DATA.contactPerson.name);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No', POLICY_BASE_DATA.contactPerson.contactNo);
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID Type', POLICY_BASE_DATA.contactPerson.idType);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID No', POLICY_BASE_DATA.contactPerson.idNo);
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Email', POLICY_BASE_DATA.contactPerson.email);
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Relationship', POLICY_BASE_DATA.contactPerson.relationship);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person Name', BASE_POLICY_DATA.contactPerson.name);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No', BASE_POLICY_DATA.contactPerson.contactNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID Type', BASE_POLICY_DATA.contactPerson.idType);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID No', BASE_POLICY_DATA.contactPerson.idNo);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Email', BASE_POLICY_DATA.contactPerson.email);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Relationship', BASE_POLICY_DATA.contactPerson.relationship);
 
         const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
         await saveButton.waitFor({ state: 'visible' });
