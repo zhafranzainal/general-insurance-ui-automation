@@ -1,19 +1,16 @@
-import { test, expect } from '../../../shared/tests/base.test.js';
+import { test } from '../../../shared/tests/base.test.js';
 import * as dotenv from 'dotenv';
-import { LoginPage } from '../../../shared/pages/login.page.js';
+import { LoginFlow } from '../../../shared/flows/login-flow.js';
 import { PolicyAdminPage } from '../pages/policy-admin.page.js';
 
 dotenv.config();
 
 test('Create new policy in Policy Admin', async ({ page }) => {
 
-    const loginPage = new LoginPage(page);
+    const loginFlow = new LoginFlow(page);
+    await loginFlow.loginAs(process.env.GIMO_USER || '', process.env.GIMO_PASS || '');
+
     const policyAdmin = new PolicyAdminPage(page);
-
-    // login
-    await loginPage.goto();
-    await loginPage.login(process.env.GIMO_USER || '', process.env.GIMO_PASS || '');
-
     await policyAdmin.navigateToWorklist();
     await policyAdmin.startNewApplication();
 
