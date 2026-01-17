@@ -8,27 +8,27 @@ UI automation framework for General Insurance systems using Playwright and TypeS
 - Supports multi-frame/micro-app architecture  
 
 ## Folder Structure
-general-insurance-ui-automation/
-│
-├─ modules/
-│ ├─ policy-admin/
-│ │ ├─ pages/ # Page objects
-│ │ ├─ flows/ # Business flows
-│ │ ├─ data/ # Test data & constants
-│ │ └─ tests/ # Test specs
-│ │
-│ └─ ... # Other modules
-│
-├─ shared/
-│ ├─ pages/ # Shared page objects (e.g. login, side menu)
-│ ├─ flows/ # Shared flows (e.g. login)
-│ ├─ models/ # TypeScript interfaces & types
-│ ├─ utils/ # Utility functions
-│ └─ tests/ # Base test class to auto start debug session
-│
-├─ playwright.config.ts # Playwright configuration
-├─ package.json # Dependencies and scripts
-└─ README.md
+# general-insurance-ui-automation/
+# │
+# ├─ modules/
+# │ ├─ policy-admin/
+# │ │ ├─ pages/ # Page objects
+# │ │ ├─ flows/ # Business flows
+# │ │ ├─ data/ # Test data & constants
+# │ │ └─ tests/ # Test specs
+# │ │
+# │ └─ ... # Other modules
+# │
+# ├─ shared/
+# │ ├─ pages/ # Shared page objects (e.g. login, side menu)
+# │ ├─ flows/ # Shared flows (e.g. login)
+# │ ├─ models/ # TypeScript interfaces & types
+# │ ├─ utils/ # Utility functions
+# │ └─ tests/ # Base test class to auto start debug session
+# │
+# ├─ playwright.config.ts # Playwright configuration
+# ├─ package.json # Dependencies and scripts
+# └─ README.md
 
 ## Setup
 1. npm install
