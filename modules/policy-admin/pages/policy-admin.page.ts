@@ -120,6 +120,9 @@ export class PolicyAdminPage {
 
         await clickButtonInCard(this.frame, 'Authorised Driver', 'Copy Vehicle Owner');
         await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', 'Self',);
+
+        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', 'BND123');
+
     }
 
 
