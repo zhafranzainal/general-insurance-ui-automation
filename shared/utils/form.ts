@@ -13,11 +13,12 @@ export function getInputGroup(
 
 export async function selectDropdownOption(
     frame: Frame,
-    dropdownLocator: Locator,
+    formName: string,
+    label: string,
     optionTitle: string
 ) {
     // Click dropdown wrapper
-    await dropdownLocator.locator('.rb-input-wrapper.rb-tags').click();
+    await getInputGroup(frame, formName, label).locator('.rb-input-wrapper.rb-tags').click();
 
     // Wait for visible select popup
     const popup = frame.locator('.rb-popup.rb-select-popup:not(.rb-popup-hide)');

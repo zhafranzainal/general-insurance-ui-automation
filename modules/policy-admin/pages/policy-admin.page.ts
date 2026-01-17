@@ -43,11 +43,8 @@ export class PolicyAdminPage {
 
     async fillPolicyInfo() {
         this.frame = await getMicroAppFrame(this.page);
-
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
-
-        const manualCoverNoteUsedDropdown = getInputGroup(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used');
-        await selectDropdownOption(this.frame, manualCoverNoteUsedDropdown, 'No');
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used', 'No');
     }
 
     async fillSalesChannelInfo() {
@@ -88,17 +85,13 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        const customerSubTypeDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type');
-        await selectDropdownOption(this.frame, customerSubTypeDropdown, 'N/A');
-
-        const idTypeDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type');
-        await selectDropdownOption(this.frame, idTypeDropdown, 'Citizen ID Card (Yellow)');
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', 'N/A');
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', 'Citizen ID Card (Yellow)');
 
         const idNoTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.');
         await fillTextField(idNoTextField, '12345');
 
-        const TitleDropdown = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title');
-        await selectDropdownOption(this.frame, TitleDropdown, 'Awang');
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', 'Awang');
 
         const customerNameTextField = getInputGroup(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name');
         await fillTextField(customerNameTextField, 'Hazim Kacak');
