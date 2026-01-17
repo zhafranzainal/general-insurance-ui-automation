@@ -25,4 +25,7 @@ test('Create new policy in Policy Admin', async ({ page }) => {
     await policyAdmin.fillVehicleInfo();
     await policyAdmin.submitPolicy();
 
+    const certNo = await policyAdmin.verifyPolicyCreated();
+    console.log('Issued certificate no:', certNo);
+
 });

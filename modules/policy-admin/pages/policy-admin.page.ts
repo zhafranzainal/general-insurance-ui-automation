@@ -137,9 +137,35 @@ export class PolicyAdminPage {
         await clickButtonInBoxFooter(this.frame, 'Issue');
     }
 
-    /** Verify policy creation inside the iframe */
-    async verifyPolicyCreated() {
-        await this.frame.waitForSelector('text=Policy created successfully', { state: 'visible', timeout: 5000 });
+    async verifyPolicyCreated(): Promise<string> {
+        this.frame = await getMicroAppFrame(this.page);
+
+        // Locate dialog
+        const dialog = this.frame.locator('div.rb-dialog-body:has(h4.rb-dialog-title:text-is("Issued"))');
+        await dialog.waitFor({ state: 'visible' });
+
+        // Verify success message
+        const message = dialog.locator('.rb-dialog-content');
+        await message.waitFor({ state: 'visible' });
+
+        const messageText = (await message.innerText()).trim();
+        if (!messageText.includes('Issue successfully!')) {
+            throw new Error(`Unexpected dialog message: ${messageText}`);
+        }
+
+        // Extract certificate number
+        const certMatch = messageText.match(/Certificate No\.\s*:\s*(\S+)/);
+        if (!certMatch) {
+            throw new Error('Certificate number not found in success message');
+        }
+
+        const certificateNo = certMatch[1];
+
+        // Verify buttons exist
+        await dialog.locator('button:has-text("Return to Home Page")').waitFor({ state: 'visible' });
+        await dialog.locator('button:has-text("View Certificate")').waitFor({ state: 'visible' });
+
+        return certificateNo;
     }
 
 }
