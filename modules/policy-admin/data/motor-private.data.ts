@@ -1,15 +1,15 @@
 export const MOTOR_PRIVATE_DATA = {
 
     vehicle: {
-        vehicleNo: 'BND123',
+        vehicleNo: 'BND1234',
         registrationYear: 2020,
         make: 'Audi',
         model: 'Audi A3 1.2',
         manufactureYear: '2020',
         engineCapacity: '1197',
         batteryCapacity: '0',
-        chassisNo: '12345',
-        engineNo: '56789',
+        chassisNo: 'JTDBR32E502345678',
+        engineNo: '2NRFEX123456',
         bodyType: 'Sedan',
         usage: 'Taxi',
     },

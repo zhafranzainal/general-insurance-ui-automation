@@ -5,21 +5,21 @@ export const POLICY_BASE_DATA = {
     participant: {
         customerSubType: 'N/A',
         idType: 'Citizen ID Card (Yellow)',
-        idNo: '12345',
+        idNo: '9005121234',
         title: 'Awang',
-        name: 'Hazim Kacak',
+        name: 'Awang Haji Ahmad bin Ali',
         dob: '2000-01-01',
         gender: 'Male',
-        contactNo: '60171234567',
+        contactNo: '6731234567',
     },
 
     contactPerson: {
-        name: 'Abu Jahal',
-        contactNo: '60123456789',
+        name: 'Dayang Hajah Siti Aminah binti Ahmad',
+        contactNo: '6731234560',
         idType: 'Citizen ID Card (Yellow)',
-        idNo: '991012101234',
-        email: 'test@example.com',
-        relationship: 'Father',
+        idNo: '6108305678',
+        email: 'aminah@example.com',
+        relationship: 'Mother',
     },
 
 };
