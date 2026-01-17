@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { fillTextField, getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
+import { clickButtonInCard, fillTextField, getInputGroup, selectDropdownOption } from '../../../shared/utils/form.js';
 import { FORM_NAMES } from '../data/formNames.js';
 
 export class PolicyAdminPage {
@@ -66,17 +66,7 @@ export class PolicyAdminPage {
     async fillParticipantInfo() {
         this.frame = await getMicroAppFrame(this.page);
 
-        // Scope to "Participant Information" card
-        const participantCard = this.frame
-            .locator('.rb-card')
-            .filter({ has: this.frame.getByText('Participant Information', { exact: true }) });
-
-        await participantCard.waitFor({ state: 'visible' });
-
-        // Click Add button inside this card only
-        const addButton = participantCard.getByRole('button', { name: 'Add' });
-        await addButton.waitFor({ state: 'visible' });
-        await addButton.click();
+        await clickButtonInCard(this.frame, 'Participant Information', 'Add');
 
         // Scope to the dialog by title
         const dialog = this.frame
@@ -128,17 +118,7 @@ export class PolicyAdminPage {
         await saveButton.waitFor({ state: 'visible' });
         await saveButton.click();
 
-        // Scope to "Participant Information" card
-        const driverCard = this.frame
-            .locator('.rb-card')
-            .filter({ has: this.frame.getByText('Authorised Driver', { exact: true }) });
-
-        await driverCard.waitFor({ state: 'visible' });
-
-        // Click copy button inside this card only
-        const copyButton = driverCard.getByRole('button', { name: 'Copy Vehicle Owner' });
-        await copyButton.waitFor({ state: 'visible' });
-        await copyButton.click();
+        await clickButtonInCard(this.frame, 'Authorised Driver', 'Copy Vehicle Owner');
     }
 
 

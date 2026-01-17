@@ -39,3 +39,19 @@ export async function fillTextField(
     await input.waitFor({ state: 'visible' });
     await input.fill(value);
 }
+
+export async function clickButtonInCard(
+    frame: Frame,
+    cardTitle: string,
+    buttonName: string
+) {
+    const card = frame
+        .locator('.rb-card')
+        .filter({ has: frame.getByText(cardTitle, { exact: true }) });
+
+    await card.waitFor({ state: 'visible' });
+
+    const button = card.getByRole('button', { name: buttonName });
+    await button.waitFor({ state: 'visible' });
+    await button.click();
+}
