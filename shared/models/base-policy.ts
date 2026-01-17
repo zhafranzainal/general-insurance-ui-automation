@@ -1,9 +1,9 @@
-export type CustomerSubType = 'N/A' | 'Individual' | 'Corporate';
-export type IdType = 'Citizen ID Card (Yellow)' | 'Passport' | 'Birth Certificate';
-export type Gender = 'Male' | 'Female';
 export type ManualCoverNoteUsed = 'Yes' | 'No';
-export type Title = 'Awang' | 'Dayang' | 'Haji' | 'Hajah';
-export type Relationship = 'Mother' | 'Father' | 'Spouse' | 'Sibling' | 'Child' | 'Guardian';
+export type CustomerSubType = 'N/A' | 'VVIP';
+export type IdType = 'Citizen ID Card (Yellow)' | 'Permanent Resident ID Card (Purple)' | 'Foreign Worker ID Card (Green)' | 'Passport' | "Driver's License" | 'Birth Certificate' | 'Other';
+export type Title = 'Awang' | 'Dayang' | 'Mr' | 'Miss';
+export type Gender = 'Male' | 'Female' | 'Unknown';
+export type Relationship = 'Mother' | 'Father' | 'Friend' | 'Brother' | 'Sister' | 'Cousin';
 
 export interface Participant {
     customerSubType: CustomerSubType;
