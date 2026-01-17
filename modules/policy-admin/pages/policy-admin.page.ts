@@ -118,6 +118,13 @@ export class PolicyAdminPage {
         await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'NCB', '0%');
     }
 
+    async clickCalculate() {
+        this.frame = await getMicroAppFrame(this.page);
+        const calculateButton = this.frame.locator('button:has-text("Calculate")');
+        await calculateButton.waitFor({ state: 'visible' });
+        await calculateButton.click();
+    }
+
     /** Submit policy inside the iframe */
     async submitPolicy() {
         await this.frame.click('button:has-text("Submit")');
