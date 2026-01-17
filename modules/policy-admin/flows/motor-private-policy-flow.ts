@@ -1,17 +1,22 @@
 import { BasePolicyFlow } from './base-policy-flow.js';
+import { createBasePolicyData } from '../data/base-policy.factory.js';
+import { createMotorPrivateData } from '../data/motor-private.factory.js';
 
 export class MotorPrivatePolicyFlow extends BasePolicyFlow {
 
-    async fillProductSpecificInfo() {
-        await this.policyAdmin.fillDriverInfo();
-        await this.policyAdmin.fillVehicleInfo();
-    }
-
     async execute(): Promise<string> {
+
+        const basePolicyData = createBasePolicyData();
+        const motorPrivateData = createMotorPrivateData();
+
         await this.createProposal();
-        await this.fillBasePolicyInfo();
-        await this.fillProductSpecificInfo();
+        await this.fillBasePolicyInfo(basePolicyData);
+
+        await this.policyAdmin.fillDriverInfo(motorPrivateData.driver.relationship);
+        await this.policyAdmin.fillVehicleInfo(motorPrivateData);
+
         return await this.submitAndVerifyPolicy();
+
     }
 
 }

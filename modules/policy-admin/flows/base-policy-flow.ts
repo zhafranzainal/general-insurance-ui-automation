@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
 import { PolicyAdminPage } from '../pages/policy-admin.page.js';
+import type { BasePolicyData } from '../../../shared/models/base-policy.js';
 
 export class BasePolicyFlow {
 
@@ -14,13 +15,13 @@ export class BasePolicyFlow {
         await this.policyAdmin.startNewApplication();
     }
 
-    async fillBasePolicyInfo() {
-        await this.policyAdmin.fillPolicyInfo();
+    async fillBasePolicyInfo(data: BasePolicyData) {
+        await this.policyAdmin.fillPolicyInfo(data.manualCoverNoteUsed);
         await this.policyAdmin.fillSalesChannelInfo();
-        await this.policyAdmin.fillParticipantInfo();
+        await this.policyAdmin.fillParticipantInfo(data);
     }
 
-    async submitAndVerifyPolicy() {
+    async submitAndVerifyPolicy(): Promise<string> {
         await this.policyAdmin.submitProposal();
         return await this.policyAdmin.verifyPolicyCreated();
     }
