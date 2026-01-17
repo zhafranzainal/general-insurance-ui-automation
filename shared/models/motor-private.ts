@@ -1,7 +1,7 @@
-export type BodyType = 'Sedan' | 'SUV' | 'Hatchback' | 'Coupe' | 'Van' | 'Pickup';
-export type VehicleUsage = 'Taxi' | 'Private' | 'Commercial' | 'Rental';
-export type NoClaimBonus = '0%' | '25%' | '30%' | '38.33%' | '45%' | '55%';
-export type DriverRelationship = 'Self' | 'Spouse' | 'Child' | 'Parent' | 'Sibling' | 'Employee';
+export type BodyType = 'Sedan' | 'SUV' | 'Hatchback' | 'Coupe' | 'Minivan' | 'Pickup Truck';
+export type VehicleUsage = 'Taxi' | 'Driving School' | 'Hire and Reward' | 'NA';
+export type NoClaimBonus = '0%' | '20%' | '25%' | '30%';
+export type DriverRelationship = 'Self' | 'Father' | 'Mother' | 'Brother' | 'Sister' | 'Cousin';
 
 export interface Vehicle {
     vehicleNo: string;
