@@ -8,6 +8,8 @@ import {
     fillTextField, getInputGroup,
     selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable
 } from '../../../shared/utils/form.js';
+import { POLICY_BASE_DATA } from '../data/policy.data.js';
+import { MOTOR_PRIVATE_DATA } from '../data/motor-private.data.js';
 
 export class PolicyAdminPage {
 
@@ -49,7 +51,7 @@ export class PolicyAdminPage {
     async fillPolicyInfo() {
         this.frame = await getMicroAppFrame(this.page);
         await this.frame.waitForSelector('div[data-form-name="editPolicyInfo"]', { state: 'visible' });
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used', 'No');
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_INFO, 'Manual Cover Note Used', POLICY_BASE_DATA.manualCoverNoteUsed);
     }
 
     async fillSalesChannelInfo() {
@@ -80,23 +82,21 @@ export class PolicyAdminPage {
 
         await dialog.waitFor({ state: 'visible' });
 
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', 'N/A');
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', 'Citizen ID Card (Yellow)');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.', '12345');
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', 'Awang');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', 'Hazim Kacak');
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Sub-Type', POLICY_BASE_DATA.participant.customerSubType);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID Type', POLICY_BASE_DATA.participant.idType);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'ID No.', POLICY_BASE_DATA.participant.idNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Title', POLICY_BASE_DATA.participant.title);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Customer Name', POLICY_BASE_DATA.participant.name);
+        await selectCalendarDate(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth', POLICY_BASE_DATA.participant.dob);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', POLICY_BASE_DATA.participant.gender);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', POLICY_BASE_DATA.participant.contactNo);
 
-        await selectCalendarDate(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Date of Birth', '2000-01-01');
-
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Gender', 'Male');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No. 1', '60171234567');
-
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person Name', 'Abu Jahal');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No', '60123456789');
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID Type', 'Citizen ID Card (Yellow)');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID No', '991012101234');
-        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Email', 'test@example.com');
-        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Relationship', 'Father');
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person Name', POLICY_BASE_DATA.contactPerson.name);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact No', POLICY_BASE_DATA.contactPerson.contactNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID Type', POLICY_BASE_DATA.contactPerson.idType);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Contact Person ID No', POLICY_BASE_DATA.contactPerson.idNo);
+        await fillTextField(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Email', POLICY_BASE_DATA.contactPerson.email);
+        await selectDropdownOption(this.frame, FORM_NAMES.CUSTOMER_MANAGEMENT, 'Relationship', POLICY_BASE_DATA.contactPerson.relationship);
 
         const saveButton = this.frame.locator('#openCustomerInfoDetail').getByRole('button', { name: 'Save' });
         await saveButton.waitFor({ state: 'visible' });
@@ -106,27 +106,26 @@ export class PolicyAdminPage {
     async fillDriverInfo() {
         this.frame = await getMicroAppFrame(this.page);
         await clickButtonInCard(this.frame, 'Authorised Driver', 'Copy Vehicle Owner');
-        await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', 'Self',);
+        await selectDropdownOptionInTable(this.frame, 'Authorised Driver', 'Relationship', MOTOR_PRIVATE_DATA.driver.relationship);
     }
 
     async fillVehicleInfo() {
         this.frame = await getMicroAppFrame(this.page);
-        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', 'BND123');
-        await selectCalendarYear(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year', 2020);
+        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Vehicle No.', MOTOR_PRIVATE_DATA.vehicle.vehicleNo);
+        await selectCalendarYear(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Registration Year', MOTOR_PRIVATE_DATA.vehicle.registrationYear);
 
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Make', 'Audi');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Model', 'Audi A3 1.2');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Manufacture Year', '2020');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Engine Capacity', '1197');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Battery Capacity', '0');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Plan Name', 'Motor Private (3P Basic)');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'NCB', '0%');
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Make', MOTOR_PRIVATE_DATA.vehicle.make);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Model', MOTOR_PRIVATE_DATA.vehicle.model);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Manufacture Year', MOTOR_PRIVATE_DATA.vehicle.manufactureYear);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Engine Capacity', MOTOR_PRIVATE_DATA.vehicle.engineCapacity);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Battery Capacity', MOTOR_PRIVATE_DATA.vehicle.batteryCapacity);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Plan Name', MOTOR_PRIVATE_DATA.cover.planName);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'NCB', MOTOR_PRIVATE_DATA.cover.noClaimBonus);
 
-        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Chassis No.', '12345');
-        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Engine No.', '56789');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Body Type', 'Sedan');
-        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Usage', 'Taxi');
-
+        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Chassis No.', MOTOR_PRIVATE_DATA.vehicle.chassisNo);
+        await fillTextField(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Engine No.', MOTOR_PRIVATE_DATA.vehicle.engineNo);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Body Type', MOTOR_PRIVATE_DATA.vehicle.bodyType);
+        await selectDropdownOption(this.frame, FORM_NAMES.EDIT_POLICY_AND_ENDO_INFO, 'Usage', MOTOR_PRIVATE_DATA.vehicle.usage);
     }
 
     async submitPolicy() {
