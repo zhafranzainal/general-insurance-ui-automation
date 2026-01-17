@@ -1,7 +1,7 @@
 import type { Page, Frame } from '@playwright/test';
 import { SideMenu } from '../../../shared/pages/side-menu.page.js';
 import { getMicroAppFrame } from '../../../shared/utils/frame-helper.js';
-import { clickButtonInCard, fillTextField, getInputGroup, selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
+import { clickButtonInBoxFooter, clickButtonInCard, fillTextField, getInputGroup, selectCalendarDate, selectCalendarYear, selectDropdownOption, selectDropdownOptionInTable } from '../../../shared/utils/form.js';
 import { FORM_NAMES } from '../data/formNames.js';
 
 export class PolicyAdminPage {
@@ -126,16 +126,12 @@ export class PolicyAdminPage {
 
     async clickCalculate() {
         this.frame = await getMicroAppFrame(this.page);
-        const calculateButton = this.frame.locator('button:has-text("Calculate")');
-        await calculateButton.waitFor({ state: 'visible' });
-        await calculateButton.click();
+        await clickButtonInBoxFooter(this.frame, 'Calculate');
     }
 
     async clickBuy() {
         this.frame = await getMicroAppFrame(this.page);
-        const calculateButton = this.frame.locator('button:has-text("Buy")');
-        await calculateButton.waitFor({ state: 'visible' });
-        await calculateButton.click();
+        await clickButtonInBoxFooter(this.frame, 'Buy');
     }
 
     async clickOkInQuotationDialog() {
@@ -151,9 +147,7 @@ export class PolicyAdminPage {
 
     async clickIssue() {
         this.frame = await getMicroAppFrame(this.page);
-        const calculateButton = this.frame.locator('button:has-text("Issue")');
-        await calculateButton.waitFor({ state: 'visible' });
-        await calculateButton.click();
+        await clickButtonInBoxFooter(this.frame, 'Issue');
     }
 
     /** Submit policy inside the iframe */

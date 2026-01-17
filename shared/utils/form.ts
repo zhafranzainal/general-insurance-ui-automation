@@ -138,3 +138,13 @@ export async function selectDropdownOptionInTable(
     await row.locator('td').nth(index).locator('.rb-input-wrapper.rb-tags').click();
     await selectOptionFromOpenPopup(frame, optionTitle);
 }
+
+export async function clickButtonInBoxFooter(
+    frame: Frame,
+    buttonText: string,
+) {
+    const button = frame.locator(`button:has-text("${buttonText}")`);
+    await button.waitFor({ state: 'visible' });
+    await button.click();
+}
+
